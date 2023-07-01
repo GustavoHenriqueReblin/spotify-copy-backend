@@ -1,10 +1,5 @@
 const conn = require('./conn');
 
-const findUser = async (login, password) => {
-    const [user] = await conn.execute("SELECT * FROM user WHERE login = ? AND password = ? LIMIT 1", [login, password]);
-    return user;
-};
-
 const addUser = async (user) => {
     const { login, password, name, dateOfBirthday, gender } = user;
 
@@ -15,6 +10,34 @@ const addUser = async (user) => {
     return {insertedId: addedUser.insertId};
 };
 
+const findUser = async (id, login, password) => {
+    if (id != "") {
+        const [userLogged] = await conn.execute("SELECT * FROM user WHERE id = ? LIMIT 1", [id]);
+        return userLogged;
+    } else {
+        const [user] = await conn.execute("SELECT * FROM user WHERE login = ? AND password = ? LIMIT 1", [login, password]);
+        return user;
+    }
+};
+
+const updateUser = async (id, user) => {
+    const {login, password, name, accountLevel, dateOfBirthday, gender, expiryDate} = user;
+    let query;
+    let updatedUser;
+
+    if (expiryDate != "") {
+        query = "UPDATE user SET expiryDate = ? WHERE id = ?";
+        updatedUser = await conn.execute(query, [expiryDate, id]);
+    } else {
+        query = "UPDATE user SET login = ?, password = ?, name = ?, accountLevel = ?, dateOfBirthday = ?, gender = ? WHERE id = ?";
+        updatedUser = await conn.execute(query,
+            [login, password, name, accountLevel, dateOfBirthday, gender, id]
+        );
+    } 
+    
+    return updatedUser;
+};
+
 module.exports = {
-    findUser, addUser
+    addUser, findUser, updateUser
 }

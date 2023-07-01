@@ -13,6 +13,7 @@ router.get("/playlists", platlistController.getAllPlaylists);
 router.get("/musicsFromAPlaylist", musicController.getAllMusicsFromAPlaylist);
 
 router.post("/user", userMiddleware.validateBodyLogin, userController.findUser);
+router.put("/user/:id", userMiddleware.validateBodyUpdateUser, userController.updateUser);
 router.post("/addUser", userMiddleware.validateBodyRegister, userController.addUser);
 
 module.exports = router;
