@@ -9,11 +9,12 @@ const sectionController = require("./controller/sectionController");
 const musicMiddleware = require("./middlewares/musicMiddleware");
 const userMiddleware = require("./middlewares/userMiddleware");
 const sectionMiddleware = require("./middlewares/sectionMiddleware");
+const playlistMiddleware = require("./middlewares/playlistMiddleaware");
 
 router.get("/musics", musicController.getAllMusics);
 router.post("/musics", musicMiddleware.validateBody, musicController.addMusic);
 
-router.get("/playlists", platlistController.getAllPlaylists);
+router.post("/playlists", playlistMiddleware.validateBodyGetAllPlaylists, platlistController.getAllPlaylists);
 router.get("/musicsFromAPlaylist", musicController.getAllMusicsFromAPlaylist);
 
 router.post("/addUser", userMiddleware.validateBodyRegister, userController.addUser);
