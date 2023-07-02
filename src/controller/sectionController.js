@@ -8,9 +8,7 @@ const getSection = async (req, res) => {
 };
 
 const refreshSection = async (req, res) => {
-    const { idUser } = req.params;
-
-    await userModel.updateSection(idUser, req.body);
+    await sectionModel.refreshSection(req.body);
     return res.status(204).json();
 };
 

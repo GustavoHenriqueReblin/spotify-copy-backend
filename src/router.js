@@ -21,6 +21,6 @@ router.post("/user", userMiddleware.validateBodyLogin, userController.findUser);
 router.put("/user/:id", userMiddleware.validateBodyUpdateUser, userController.updateUser);
 
 router.post("/section", sectionMiddleware.validateBodySection, sectionController.getSection);
-router.put("/section/:idUser", sectionMiddleware.validateBodyRefreshSection, sectionController.refreshSection);
+router.post("/refreshSection", sectionMiddleware.validateBodyRefreshSection, sectionController.refreshSection);
 
 module.exports = router;
