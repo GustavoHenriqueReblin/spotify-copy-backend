@@ -17,6 +17,25 @@ const validateBodySection = (req, res, next) => {
     next();
 };
 
+const validateBodyRefreshSection = (req, res, next) => {
+    const { body } = req;
+
+    if (body.ip === undefined) {
+        return res.status(400).json({message: "The field 'ip' is required."});
+    } else 
+    if (body.ip === '') {
+        return res.status(400).json({message: "The field 'ip' cannot be empty."});
+    } else 
+    if (body.expirationDate === undefined) {
+        return res.status(400).json({message: "The field 'expirationDate' is required."});
+    } else 
+    if (body.expirationDate === '') {
+        return res.status(400).json({message: "The field 'expirationDate' cannot be empty."});
+    }
+
+    next();
+};
+
 module.exports = {
-    validateBodySection
+    validateBodySection, validateBodyRefreshSection
 };

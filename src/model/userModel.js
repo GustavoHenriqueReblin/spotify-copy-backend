@@ -22,11 +22,9 @@ const findUser = async (id, login, password) => {
 
 const updateUser = async (id, user) => {
     const {login, password, name, accountLevel, dateOfBirthday, gender} = user;
-    let query;
-    let updatedUser;
 
-    query = "UPDATE user SET login = ?, password = ?, name = ?, accountLevel = ?, dateOfBirthday = ?, gender = ? WHERE id = ?";
-    updatedUser = await conn.execute(query,
+    const query = "UPDATE user SET login = ?, password = ?, name = ?, accountLevel = ?, dateOfBirthday = ?, gender = ? WHERE id = ?";
+    const updatedUser = await conn.execute(query,
         [login, password, name, accountLevel, dateOfBirthday, gender, id]
     );
     
