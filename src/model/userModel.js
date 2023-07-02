@@ -21,19 +21,14 @@ const findUser = async (id, login, password) => {
 };
 
 const updateUser = async (id, user) => {
-    const {login, password, name, accountLevel, dateOfBirthday, gender, expiryDate} = user;
+    const {login, password, name, accountLevel, dateOfBirthday, gender} = user;
     let query;
     let updatedUser;
 
-    if (expiryDate != "") {
-        query = "UPDATE user SET expiryDate = ? WHERE id = ?";
-        updatedUser = await conn.execute(query, [expiryDate, id]);
-    } else {
-        query = "UPDATE user SET login = ?, password = ?, name = ?, accountLevel = ?, dateOfBirthday = ?, gender = ? WHERE id = ?";
-        updatedUser = await conn.execute(query,
-            [login, password, name, accountLevel, dateOfBirthday, gender, id]
-        );
-    } 
+    query = "UPDATE user SET login = ?, password = ?, name = ?, accountLevel = ?, dateOfBirthday = ?, gender = ? WHERE id = ?";
+    updatedUser = await conn.execute(query,
+        [login, password, name, accountLevel, dateOfBirthday, gender, id]
+    );
     
     return updatedUser;
 };
