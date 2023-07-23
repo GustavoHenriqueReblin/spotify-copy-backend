@@ -13,6 +13,7 @@ const playlistMiddleware = require("./middlewares/playlistMiddleaware");
 
 router.get("/musics", musicController.getAllMusics);
 router.post("/musics", musicMiddleware.validateBody, musicController.addMusic);
+router.post("/lastMusic", musicMiddleware.validateBodyLastMusic, musicController.getLastMusic);
 
 router.post("/playlists", playlistMiddleware.validateBodyGetAllPlaylists, platlistController.getAllPlaylists);
 router.get("/musicsFromAPlaylist", musicController.getAllMusicsFromAPlaylist);

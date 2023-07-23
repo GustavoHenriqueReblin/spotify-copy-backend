@@ -17,6 +17,23 @@ const getAllMusicsFromAPlaylist = async (idPlaylist) => {
     return musics;
 };
 
+const getLastMusic = async(idMusic) => {
+    const query = 
+        "SELECT music.*, " +
+        "( " +	
+        "    SELECT GROUP_CONCAT(CONCAT(artist.firstName, ' ', artist.lastName) SEPARATOR ', ') artists FROM music " +
+        "    INNER JOIN art_mus ON art_mus.idMusic = music.id " +
+        "    INNER JOIN artist ON artist.id = art_mus.idArtist " +
+        "    WHERE music.id = ? " +
+        ") artistsNames " +
+        "FROM music " +
+        "WHERE music.id = ? ";
+    const [music] = await conn.execute(
+        query, [idMusic, idMusic]
+    );
+    return music;
+}
+
 const addMusic = async (music) => {
     const { title, isFavorite, duration, image } = music;
 
@@ -28,5 +45,5 @@ const addMusic = async (music) => {
 };
 
 module.exports = {
-    getAllMusics, getAllMusicsFromAPlaylist, addMusic
+    getAllMusics, getAllMusicsFromAPlaylist, getLastMusic, addMusic
 }

@@ -10,11 +10,17 @@ const getAllMusicsFromAPlaylist = async (_req, res) => {
     return res.status(200).json(musics);
 }
 
+const getLastMusic = async (req, res) => {
+    let { idMusic } = req.body;
+    const music = await musicModel.getLastMusic(idMusic);
+    return res.status(200).json(music);
+}
+
 const addMusic = async (req, res) => {
     const addedMusic = await musicModel.addMusic(req.body);
     return res.status(201).json(addedMusic);
 };
 
 module.exports = {
-    getAllMusics, getAllMusicsFromAPlaylist, addMusic
+    getAllMusics, getAllMusicsFromAPlaylist, getLastMusic, addMusic
 }

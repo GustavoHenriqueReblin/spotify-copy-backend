@@ -26,6 +26,17 @@ const validateBody = (req, res, next) => {
     next();
 }
 
+const validateBodyLastMusic = (req, res, next) => {
+    const { body } = req;
+    if (body.idMusic === undefined) {
+        return res.status(400).json({message: "The field 'idMusic' is required."});
+    }
+    if (body.idMusic === '') {
+        return res.status(400).json({message: "The field 'idMusic' cannot be empty."});
+    }
+    next();
+}
+
 module.exports = {
-    validateBody
+    validateBody, validateBodyLastMusic
 };

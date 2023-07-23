@@ -17,7 +17,6 @@ const findUser = async (id, login, password) => {
         return userLogged;
     } else {
         const encryptedPassword = await helper.sha1(password);
-        console.log(encryptedPassword);
         const [user] = await conn.execute("SELECT * FROM user WHERE login = ? AND password = ? LIMIT 1", [login, encryptedPassword]);
         return user;
     }
