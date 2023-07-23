@@ -1,4 +1,4 @@
-const validateBodySection = (req, res, next) => {
+const validateBodySession = (req, res, next) => {
     const { body } = req;
 
     if (body.idUser === undefined) {
@@ -17,7 +17,7 @@ const validateBodySection = (req, res, next) => {
     next();
 };
 
-const validateBodyRefreshSection = (req, res, next) => {
+const validateBodyRefreshSession = (req, res, next) => {
     const { body } = req;
 
     if (body.idUser === undefined) {
@@ -43,5 +43,5 @@ const validateBodyRefreshSection = (req, res, next) => {
 };
 
 module.exports = {
-    validateBodySection, validateBodyRefreshSection
+    validateBodySession, validateBodyRefreshSession
 };

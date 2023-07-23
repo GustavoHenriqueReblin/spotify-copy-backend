@@ -1,11 +1,17 @@
 const validateBodyRegister = (req, res, next) => {
     const { body } = req;
 
+    if (body.idLastMusic === undefined) {
+        return res.status(400).json({message: "The field 'idLastMusic' is required."});
+    } else 
+    if (body.idLastMusic === '') {
+        return res.status(400).json({message: "The field 'idLastMusic' cannot be empty."});
+    }
     if (body.login === undefined) {
-        return res.status(400).json({message: "The field 'e-mail' is required."});
+        return res.status(400).json({message: "The field 'login' is required."});
     } else 
     if (body.login === '') {
-        return res.status(400).json({message: "The field 'e-mail' cannot be empty."});
+        return res.status(400).json({message: "The field 'login' cannot be empty."});
     } else 
     if (body.password === undefined) {
         return res.status(400).json({message: "The field 'password' is required."});

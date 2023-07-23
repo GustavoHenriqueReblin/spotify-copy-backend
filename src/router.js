@@ -4,11 +4,11 @@ const router = express.Router();
 const musicController = require("./controller/musicController");
 const platlistController = require("./controller/playlistController");
 const userController = require("./controller/userController");
-const sectionController = require("./controller/sectionController");
+const sessionController = require("./controller/sessionController");
 
 const musicMiddleware = require("./middlewares/musicMiddleware");
 const userMiddleware = require("./middlewares/userMiddleware");
-const sectionMiddleware = require("./middlewares/sectionMiddleware");
+const sessionMiddleware = require("./middlewares/sessionMiddleware");
 const playlistMiddleware = require("./middlewares/playlistMiddleaware");
 
 router.get("/musics", musicController.getAllMusics);
@@ -22,7 +22,7 @@ router.post("/addUser", userMiddleware.validateBodyRegister, userController.addU
 router.post("/user", userMiddleware.validateBodyLogin, userController.findUser);
 router.put("/user/:id", userMiddleware.validateBodyUpdateUser, userController.updateUser);
 
-router.post("/section", sectionMiddleware.validateBodySection, sectionController.getSection);
-router.post("/refreshSection", sectionMiddleware.validateBodyRefreshSection, sectionController.refreshSection);
+router.post("/section", sessionMiddleware.validateBodySession, sessionController.getSession);
+router.post("/refreshSection", sessionMiddleware.validateBodyRefreshSession, sessionController.refreshSession);
 
 module.exports = router;
