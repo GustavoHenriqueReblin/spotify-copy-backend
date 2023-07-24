@@ -5,7 +5,7 @@ const addUser = async (user) => {
     const { idLastMusic, login, password, name, accountLevel, dateOfBirthday, gender } = user;
     
     const query = "INSERT INTO user (idLastMusic, login, password, name, accountLevel, dateOfBirthday, gender) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    const encryptedPassword = await helper.sha1(password);
+    const encryptedPassword = password;//await helper.sha1(password);
     const [addedUser] = await conn.execute(
         query, [idLastMusic, login, encryptedPassword, name, accountLevel, dateOfBirthday, gender]
     );
@@ -20,7 +20,7 @@ const findUser = async (id, login, password) => {
         );
         return userLogged;
     } else {
-        const encryptedPassword = await helper.sha1(password);
+        const encryptedPassword = password;//await helper.sha1(password);
         const [user] = await conn.execute(
             "SELECT * FROM user WHERE login = ? AND password = ? LIMIT 1", [login, encryptedPassword]
         );

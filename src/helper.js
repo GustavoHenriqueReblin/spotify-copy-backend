@@ -23,7 +23,6 @@ const sha1 = (str) => {
     console.log(error);
   }
 }
-
   
 module.exports = {
     sha1
