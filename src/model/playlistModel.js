@@ -5,7 +5,7 @@ const getAllPlaylists = async (user) => {
     const query = 
         "SELECT playlist.*, CONCAT(artist.firstName, ' ', artist.lastName) artistName " + 
         "FROM playlist " + 
-        "INNER JOIN artist ON artist.id = playlist.idArtist " +
+        "LEFT JOIN artist ON artist.id = playlist.idArtist " +
         "INNER JOIN library ON library.id = playlist.idLibrary " +
         "WHERE library.idUser = ?";
     const [playlists] = await conn.execute(
